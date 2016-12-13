@@ -89,7 +89,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     private PullToRefreshScrollView mLeftLayout;
     public SlidingMenu menu;
     private LinearLayout mTopic, mCollection, mBill, mWallet, mSetting, mCart,
-            mOrder, mAllianceOrder, mZhongCou, mCarft;
+            mOrder, mAllianceOrder, mZhongCou, mCarft,mMyMsg,mSysMsg;
     private TextView mTopicNum, mCollectionNum, mLeftBillNum, mLeftWalletNum,
             mSettingNum, mTitle, mLeftName, mLeftSex, mLeftLocation,
             mLeftCartNum, mLeftOrderNum, mLeftAllianceOrder, mLeftZhongCouNum,
@@ -357,7 +357,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 // StringBuilder showMsg = new StringBuilder();
                 // showMsg.append(KEY_MESSAGE + " : " + messge + "\n");
                 if (extras == 1) {
-                    mRightTop.setVisibility(View.VISIBLE);
+//                    mRightTop.setVisibility(View.VISIBLE);
+                    mRightTop.setVisibility(View.GONE);
+
                 } else {
                     mRightTop.setVisibility(View.GONE);
                 }
@@ -446,6 +448,10 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 R.id.ll_leftMenu_alliance_Order);
         mZhongCou = (LinearLayout) menu.getMenu().findViewById(
                 R.id.ll_leftMenu_ZhongCou);
+        mMyMsg = (LinearLayout) menu.getMenu().findViewById(
+                R.id.ll_leftMenu_MyMsg);
+        mSysMsg = (LinearLayout) menu.getMenu().findViewById(
+                R.id.ll_leftMenu_SysMsg);
         mCarft = (LinearLayout) menu.getMenu().findViewById(
                 R.id.ll_leftMenu_Carft);
         mBill = (LinearLayout) menu.getMenu().findViewById(
@@ -500,6 +506,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         mZhongCou.setOnClickListener(mLeftMenuListener);
         mOrder.setOnClickListener(mLeftMenuListener);
         mAllianceOrder.setOnClickListener(mLeftMenuListener);
+        //
+        mMyMsg.setOnClickListener(mLeftMenuListener);
+        mSysMsg.setOnClickListener(mLeftMenuListener);
         if (HighCommunityApplication.mUserInfo.getId() != 0)
             HTTPHelper.getUserCenter(mIbpi,
                     HighCommunityApplication.mUserInfo.getId() + "");
@@ -688,6 +697,29 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                 Constacts.MENU_LEFT_ZHONGCOU);
                         Constacts.mUserCenter.setCho(0);
                         break;
+                    case R.id.ll_leftMenu_MyMsg://我的消息
+                        Log.d(TAG,"点击我的消息");
+//                        mLeftjump.putExtra(MenuLeftAct.ACTIVITYTAG,
+//                                Constacts.MENU_MYMESSAGE);
+//                        Constacts.mUserCenter.setCho(0);
+                        mLeftjump.putExtra(MenuLeftAct.ACTIVITYTAG,
+                                    Constacts.MENU_LEFT_MESSAGECENTER);
+//                        if (HighCommunityUtils.isLogin(MainActivity.this)) {
+//                            mRightTop.setVisibility(View.GONE);
+////                            Intent mLeftjump = new Intent(MainActivity.this,
+////                                    GeneratedClassUtils.get(MenuLeftAct.class));
+//                            mLeftjump.putExtra(MenuLeftAct.ACTIVITYTAG,
+//                                    Constacts.MENU_LEFT_MESSAGECENTER);
+////                            startActivity(mLeftjump);
+//                        }
+                        break;
+                    case R.id.ll_leftMenu_SysMsg://系统消息
+                        Log.d(TAG,"点击系统消息");
+
+                        mLeftjump.putExtra(MenuLeftAct.ACTIVITYTAG,
+                                Constacts.MENU_SYSMESSAGE);
+                        Constacts.mUserCenter.setCho(0);
+                        break;
                 }
                 if (view.getId() != R.id.ll_leftMenu_setting) {
                     setleftData();
@@ -707,6 +739,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             FragmentManager manager = getSupportFragmentManager();
             manager.popBackStackImmediate(null, 1);
         }
+
         neighborFrag = new NeighborFrag();
         serviceFrag = new ServiceFrag();
         huiLifeFrag = new HuiLifeFrag_();
@@ -755,7 +788,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     if (msgNum == 0) {
                         mRightTop.setVisibility(View.GONE);
                     } else {
-                        mRightTop.setVisibility(View.VISIBLE);
+                        mRightTop.setVisibility(View.GONE);
+//                        mRightTop.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -906,8 +940,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 }
 
 //                    startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
-
-
 
 //                    if (HighCommunityUtils.isLogin(MainActivity.this)) {
 //                        mRightTop.setVisibility(View.GONE);

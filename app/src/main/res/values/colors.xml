@@ -109,4 +109,7 @@
     <color name="result_view">#b0000000</color>
     <color name="viewfinder_mask">#60000000</color>
     <color name="possible_result_points">#c0ffff00</color>
+    <!--搜索-->
+    <color name="btn_press_color">#5677fc</color>
+    <color name="btn_pressed_color">#3ca0ec</color>
 </resources>

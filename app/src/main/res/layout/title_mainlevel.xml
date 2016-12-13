@@ -79,6 +79,7 @@
             android:layout_marginRight="11dip"
             android:layout_marginTop="@dimen/padding_12"
             android:clickable="true"
+
             android:src="@mipmap/img_title_new_message"
             android:visibility="gone" />
 
