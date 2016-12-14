@@ -1725,6 +1725,18 @@ public class HTTPHelper {
         mParamMap.put("id", id);
         post(mParamMap, mIbpi, url);
     }
+
+    /**
+     * 自治大厅   留言详情
+     * @param mIbpi
+     * @param id  监督id
+     */
+    public static void GetMessageDetail(BpiHttpHandler.IBpiHttpHandler mIbpi, String id) {
+        String url = HTTPPOSTURL + "ywatch/wordsdetail.html";
+        HashMap<String, String> mParamMap = getBaseParamMap();
+        mParamMap.put("id", id);
+        post(mParamMap, mIbpi, url);
+    }
     /**
      * 解析自治大厅 问询详情
      * @param result
@@ -1822,7 +1834,18 @@ public class HTTPHelper {
         mParamMap.put("content", content);
         post(mParamMap, mIbpi, url);
     }
-
+    /** 自治大厅-监督页面-创建留言
+     * @param mIbpi
+     * @param uid
+     * @param content
+     */
+    public static void AutoCreatMessage(BpiHttpHandler.IBpiHttpHandler mIbpi, String uid,String content) {
+        String url = HTTPPOSTURL + "ywatch/words.html";
+        HashMap<String, String> mParamMap = getBaseParamMap();
+        mParamMap.put("uid", uid);
+        mParamMap.put("content", content);
+        post(mParamMap, mIbpi, url);
+    }
 
     /**
      * 自治大厅   提案详情

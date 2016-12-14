@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.hi028.android.highcommunity.R;
 import cn.hi028.android.highcommunity.activity.fragment.AutoDetail_Inquiry;
+import cn.hi028.android.highcommunity.activity.fragment.AutoDetail_Message;
 import cn.hi028.android.highcommunity.activity.fragment.AutoDetail_Motion;
 import cn.hi028.android.highcommunity.activity.fragment.AutoDetail_Questions;
 import cn.hi028.android.highcommunity.activity.fragment.AutoDetail_Report;
@@ -41,6 +42,11 @@ static  final  String Tag_debug="AutonomousAct_Third--->";
 
     /**创建提案**/
     public static final int TAG_CREAT_MOTION=7;
+    /**留言详情**/
+    public static final int TAG_MESSAGE_DETAIL = 8;
+    /**创建留言**/
+    public static final int TAG_CREAT_MESSAGE=9;
+
     @Bind(R.id.auto_third_img_back)
     ImageView img_Back;
     @Bind(R.id.auto_thirdc_tv_title)
@@ -97,6 +103,17 @@ String inquiry_id=getIntent().getStringExtra("inquiry_id");
                     ft.replace(R.id.auto_third_fraglayout, mInquiry, AutoDetail_Inquiry.FRAGMENTTAG);
                 }
                 break;
+            case TAG_MESSAGE_DETAIL://询问详情
+                tv_Title.setText("留言详情");
+                AutoDetail_Message mMessage = new AutoDetail_Message();
+                String message_id=getIntent().getStringExtra("message_id");
+                Bundle mMessageDetailbundle=new Bundle();
+                if (message_id!=null){
+                    mMessageDetailbundle.putString("message_id",message_id);
+                    mMessage.setArguments(mMessageDetailbundle);
+                    ft.replace(R.id.auto_third_fraglayout, mMessage, AutoDetail_Message.FRAGMENTTAG);
+                }
+                break;
             case TAG_MOTION_DETAIL://提案详情
                 tv_Title.setText("详情");
                 String motion_id=getIntent().getStringExtra("motion_id");
@@ -143,8 +160,20 @@ String inquiry_id=getIntent().getStringExtra("inquiry_id");
                 Bundle mCreatInquirybundle=new Bundle();
                 if (owner_id!=-1){
                     mCreatInquirybundle.putInt("owner_id",owner_id);
+                    mCreatInquirybundle.putBoolean("isMessage",false);
                     mCreatInquiry.setArguments(mCreatInquirybundle);
                     ft.replace(R.id.auto_third_fraglayout,mCreatInquiry,AutoFrag_CreatReport.FRAGMENTTAG);
+                }
+                break;
+            case TAG_CREAT_MESSAGE://创建留言
+                tv_Title.setText("提交留言");
+                AutoFrag_CreatInquiry mCreatInquiry2=new AutoFrag_CreatInquiry();
+                Bundle mCreatInquirybundle2=new Bundle();
+                if (owner_id!=-1){
+                    mCreatInquirybundle2.putInt("owner_id",owner_id);
+                    mCreatInquirybundle2.putBoolean("isMessage",true);
+                    mCreatInquiry2.setArguments(mCreatInquirybundle2);
+                    ft.replace(R.id.auto_third_fraglayout,mCreatInquiry2,AutoFrag_CreatReport.FRAGMENTTAG);
                 }
                 break;
             case TAG_CREAT_MOTION://创建提案
