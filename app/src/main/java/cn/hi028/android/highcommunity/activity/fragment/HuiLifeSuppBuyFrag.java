@@ -268,6 +268,7 @@ public class HuiLifeSuppBuyFrag extends BaseFragment {
                 }
                 params.put("goods", jsonArray);
             	LogUtil.d("------a1");
+                Log.e("提交的订单信息：",params.toString());
                 HTTPHelper.submitHuiSuppOrder(mIbpiOrder, params.toString());
                 LogUtil.d("------a2");
             } catch (JSONException e) {

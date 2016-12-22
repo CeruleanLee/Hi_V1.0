@@ -121,6 +121,11 @@ public class AutonomousMainFrag extends BaseFragment implements OnClickListener 
             mData = (Auto_InitBean.Auto_Init_DataEntity) message;
             isLocationNoData = false;
             mStatus = mData.getStatus();
+            if (mData.getType() != -1) {
+
+                HighCommunityApplication.mUserInfo.setUser_Type(mData.getType() + "");
+                Log.e(Tag,"用户业主大厅属性："+ HighCommunityApplication.mUserInfo.getUser_Type());
+            }
             if (mData.getOwner_id() != -1) {
 
                 HighCommunityApplication.mUserInfo.setOwner_id(mData.getOwner_id() + "");

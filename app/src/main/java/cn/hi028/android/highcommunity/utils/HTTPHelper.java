@@ -664,7 +664,7 @@ public class HTTPHelper {
         String url = HTTPPOSTURL + "goods/order.html";
         HashMap<String, String> mParamMap = getBaseParamMap();
         mParamMap.put("order", order);
-        Log.d(Tag,"------post2");
+        Log.d(Tag,"mParamMap:"+mParamMap.toString());
         post(mParamMap, mIbpi, url);
     }
 
@@ -1922,6 +1922,8 @@ public class HTTPHelper {
     }
 
 
+
+
     /**
      * 自治大厅-提交投票数据
      **/
@@ -1943,7 +1945,22 @@ public class HTTPHelper {
         mParamMap.put("vote_id",vote_id);
         post(mParamMap, mIbpi, url);
     }
+    /**
+     * 自治大厅选举投票结果得票率_单个
+     **/
+    public static void getSingleVotedData(BpiHttpHandler.IBpiHttpHandler mIbpi,String title_id) {
+        String url = HTTPPOSTURL + "yvote/result2.html";
+        HashMap<String, String> mParamMap = getBaseParamMap();
+        mParamMap.put("title_id",title_id);
+        post(mParamMap, mIbpi, url);
+    }
 
+    /**
+     * 解析自治选举投票结果得票率——单个
+     */
+    public static Auto_VoteResultBean.VoteResultDataEntity ResolveSingleVotedDataEntity(String result) {
+        return gson.fromJson(result, Auto_VoteResultBean.VoteResultDataEntity.class);
+    }
     /**
      * 解析自治选举投票结果得票率
      *
